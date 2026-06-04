@@ -1,0 +1,9 @@
+# Build context excludes (BuildKit reads this for `-f docker/Dockerfile`).
+# Keep the context small and let the build stages produce fresh artifacts.
+.git/
+.agents/
+target/
+node_modules/
+assets/static/dist/
+docker/
+*.md

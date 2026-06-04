@@ -1,0 +1,12 @@
+// nERP styles — compiled by Vite into assets/static/dist/app.css.
+//
+// Tabler is Bootstrap-based: its Sass variables are `!default`, so override
+// them BEFORE importing Tabler, then add nERP's own styles afterwards.
+
+// 1) nERP brand
+$primary: #4263eb;
+
+// 2) Tabler core (SCSS source → fully themeable)
+@import '@tabler/core/scss/tabler';
+
+// 3) nERP custom styles below this line.

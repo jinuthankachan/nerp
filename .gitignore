@@ -32,3 +32,8 @@ target/
 # OS / editor cruft
 .DS_Store
 Thumbs.db
+
+# Node / Vite frontend build
+node_modules/
+/assets/static/dist/
+npm-debug.log*
