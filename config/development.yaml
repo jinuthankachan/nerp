@@ -48,7 +48,7 @@ mailer:
   # SMTP mailer configuration.
   smtp:
     # Enable/Disable smtp mailer.
-    enable: true
+    enable: false
     # SMTP server host. e.x localhost, smtp.gmail.com
     host: localhost
     # SMTP server port
