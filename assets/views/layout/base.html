@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{% block title %}nERP{% endblock %}</title>
+
+    <!-- Tabler core + icons (vendored locally, served at /static) -->
+    <link rel="stylesheet" href="/static/vendor/tabler/css/tabler.min.css" />
+    <link rel="stylesheet" href="/static/vendor/tabler-icons/tabler-icons.min.css" />
+    <!-- nERP overrides (loaded last so they win) -->
+    <link rel="stylesheet" href="/static/css/app.css" />
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div class="page">
+      {% block body %}
+      <header class="navbar navbar-expand-md d-print-none">
+        <div class="container-xl">
+          <a href="/" class="navbar-brand fw-bold fs-2 text-primary">
+            <i class="ti ti-circles-relation me-1"></i>nERP
+          </a>
+        </div>
+      </header>
+      <div class="page-wrapper">
+        <div class="page-body">
+          <div class="container-xl">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+
+    <!-- htmx + Tabler behavior, then nERP app JS -->
+    <script src="/static/vendor/htmx/htmx.min.js" defer></script>
+    <script src="/static/vendor/tabler/js/tabler.min.js" defer></script>
+    <script src="/static/js/app.js" defer></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

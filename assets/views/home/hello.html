@@ -1,0 +1,41 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Welcome · nERP{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card card-md">
+      <div class="card-body text-center py-5">
+        <span class="avatar avatar-xl mb-3 bg-primary-lt text-primary">
+          <i class="ti ti-rocket fs-1"></i>
+        </span>
+        <h1 class="display-6 mb-2">nERP is running</h1>
+        <p class="text-secondary">
+          loco + htmx + Tabler are wired together. This view lives at
+          <code>assets/views/home/hello.html</code>.
+        </p>
+
+        <div class="d-flex justify-content-center flex-wrap gap-2 my-4">
+          <span class="badge badge-outline text-blue"><i class="ti ti-train me-1"></i>loco</span>
+          <span class="badge badge-outline text-purple"><i class="ti ti-arrows-exchange me-1"></i>htmx</span>
+          <span class="badge badge-outline text-green"><i class="ti ti-palette me-1"></i>Tabler</span>
+          <span class="badge badge-outline text-pink"><i class="ti ti-icons me-1"></i>Tabler Icons</span>
+        </div>
+
+        <button class="btn btn-primary"
+                hx-get="/htmx-probe"
+                hx-target="#htmx-probe"
+                hx-swap="innerHTML">
+          <i class="ti ti-bolt me-1"></i>Test htmx
+        </button>
+        <div id="htmx-probe" class="mt-3 text-secondary"></div>
+
+        <div class="mt-4 text-secondary small">
+          i18n: {{ t(key="hello-world", lang="en-US") }} · {{ t(key="hello-world", lang="de-DE") }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
