@@ -1,0 +1,44 @@
+# nERP local stack — Postgres + the app (built from docker/Dockerfile).
+#
+# Run from the repo root:
+#   docker compose -f docker/compose.yaml up --build
+# Then open http://localhost:5150 . Stop with `docker compose -f docker/compose.yaml down`.
+
+name: nerp
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: loco
+      POSTGRES_PASSWORD: loco
+      POSTGRES_DB: nerp_development
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U loco -d nerp_development"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      # Use the in-repo development config (production.yaml is gitignored / not in the image).
+      LOCO_ENV: development
+      # Point loco at the postgres service (overrides the localhost default in config/development.yaml).
+      DATABASE_URL: postgres://loco:loco@postgres:5432/nerp_development
+    # Bind 0.0.0.0 so the mapped port is reachable from the host (config default is localhost).
+    command: ["nerp", "start", "--binding", "0.0.0.0"]
+    ports:
+      - "5150:5150"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
